@@ -1,4 +1,4 @@
-class FoodsController < ApplicationController
+class Api::V2::FoodsController < ApplicationController
   def index
     @foods = Food.all
     render "index.json.jbuilder"
@@ -30,7 +30,7 @@ class FoodsController < ApplicationController
   def destroy
     @food = Food.find_by(id: params[:id])
     @food.delete
-    render "index.json.jbuilder"
+    redirect_to "/foods", status: 303
   end
 
 end
