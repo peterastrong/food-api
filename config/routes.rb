@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  #angular foods controller
+  get "/foods", to: "foods#index"
+
   namespace :api do
     namespace :v1 do   
       get "/foods", to: "foods#index"

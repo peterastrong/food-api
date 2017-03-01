@@ -10,8 +10,12 @@ class Api::V2::FoodsController < ApplicationController
   end
 
   def create
-    @food = Food.create(ingredient1: params[:ingredient1], ingredient2: params[:ingredient2], spice1: params[:spice1], spice1amount: params[:spice1amount], spice2: params[:spice2], spice2amount: params[:spice2amount])
-    render "show.json.jbuilder"
+    @food = Food.new(ingredient1: params[:ingredient1], ingredient2: params[:ingredient2], spice1: params[:spice1], spice1amount: params[:spice1amount], spice2: params[:spice2], spice2amount: params[:spice2amount])
+    if @food.save
+      render "show.json.jbuilder"
+    else
+      render json: { errors: @food.errors.full_messages }, status: 422
+    end 
   end
 
   def update

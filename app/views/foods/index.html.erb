@@ -1,0 +1,42 @@
+<div ng-app="app">
+  <div ng-controller="foodsCtrl" ng-init="setup()">
+    <ul>
+      <li ng-repeat="error in errors"> {{ error }} </li>
+    </ul>
+    <div>
+      <p>add a new recipe</p>
+      <p>First Ingredient: <input ng-model=inputFirstIng> </p>
+      <p>Second Ingredient: <input ng-model=inputSecndIng> </p>
+      <p>first spice: <input ng-model=inputFirstSpice> </p>
+      <p>Second spice: <input ng-model=inputSecndSpice> </p>
+      <button ng-click="addFood(inputFirstIng, inputSecndIng, inputFirstSpice, inputSecndSpice)">Add Food.</button>
+    </div>
+
+    <div>
+      <p> Filter by first Ingredient<input ng-model="filterFirstIng"> </p>
+      <p> Filter by second Ingredient<input ng-model="filterSecondIng"> </p>
+    </div>
+
+    
+
+    <table style="width:100%">
+      <tr>
+        <th ng-click="toggleOrder('id')">Id # {{sortArrow('id')}} </th>
+        <th ng-click="toggleOrder('first_ingredient')">First Ingredient {{sortArrow('first_ingredient')}}</th>
+        <th ng-click="toggleOrder('second_ingredient')">Second Ingredient {{sortArrow('second_ingredient')}}</th> 
+        <th ng-click="toggleOrder('first_spice')">First Spice {{sortArrow('first_spice')}} </th>
+        <th ng-click="toggleOrder('second_spice')">Second Spice {{sortArrow('second_spice')}} </th>
+      </tr>
+      
+      <tr ng-repeat="food in foods | filter: { first_ingredient: filterFirstIng, second_ingredient: filterSecondIng } | orderBy:orderAttribute:isDescending">
+        <td>{{food.id}}</td>
+        <td>{{food.first_ingredient}}</td> 
+        <td>{{food.second_ingredient}}</td>
+        <td>{{food.first_spice}}</td>
+        <td>{{food.second_spice}}</td>
+      </tr>
+    </table> 
+   
+    </div>
+  </div>
+</div>
